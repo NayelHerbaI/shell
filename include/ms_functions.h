@@ -6,28 +6,40 @@
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 15:48:45 by jihi              #+#    #+#             */
-/*   Updated: 2026/04/13 20:04:25 by jihi             ###   ########.fr       */
+/*   Updated: 2026/04/14 13:06:19 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MS_FUNCTIONS_H
 # define MS_FUNCTIONS_H
 
-//				init_shell.c
+
+/*				INIT								*/
+
+// init_shell.c
 
 t_shell	*init_shell(char **env);
 t_env	*init_env(char **env);
 
-//				node_utils.c
+// node_utils.c
 
 t_env	*add_new(char *str);
 void	add_back(t_env **list, t_env *new);
 
 
+/*				LIBFT								*/
+
+int		ft_strcmp(char *s1, char *s2);
+char	*ft_strdup(char *str);
+size_t	ft_strlen(char *str);
 
 
+/*				BUILT_IN							*/
 
+// get_built_in_type.c
 
+t_builtin	get_builtin_type(char *cmd_name);
+int			is_builtin(t_cmd *cmd);
 
 
 

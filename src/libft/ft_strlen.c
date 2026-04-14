@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 15:19:29 by jihi              #+#    #+#             */
-/*   Updated: 2026/04/14 13:06:54 by jihi             ###   ########.fr       */
+/*   Created: 2025/11/03 15:46:28 by hnayel            #+#    #+#             */
+/*   Updated: 2026/04/14 12:52:32 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env(t_shell *shell)
+size_t	ft_strlen(char *str)
 {
-	for (t_env *tmp = shell->env; tmp; tmp = tmp->next)
-		printf("%s=%s\n", tmp->key, tmp->value);
-}
+	size_t	i;
 
-int	main(int ac, char **av, char **env)
-{
-	t_shell	*shell;
-	(void)ac;
-	(void)av;
-
-	shell = init_shell(env);
-	if (!shell)
-		return (-1);
-	// print_env(shell);
-	printf("%d\n", get_builtin_type("echo"));
-	printf("%d\n", get_builtin_type("ls"));
-	return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

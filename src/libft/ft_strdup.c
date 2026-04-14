@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 15:19:29 by jihi              #+#    #+#             */
-/*   Updated: 2026/04/14 13:06:54 by jihi             ###   ########.fr       */
+/*   Created: 2025/11/03 16:47:44 by hnayel            #+#    #+#             */
+/*   Updated: 2026/04/14 12:52:24 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env(t_shell *shell)
+char	*ft_strdup(char *str)
 {
-	for (t_env *tmp = shell->env; tmp; tmp = tmp->next)
-		printf("%s=%s\n", tmp->key, tmp->value);
-}
+	size_t	len;
+	int		i;
+	char	*new_string;
 
-int	main(int ac, char **av, char **env)
-{
-	t_shell	*shell;
-	(void)ac;
-	(void)av;
-
-	shell = init_shell(env);
-	if (!shell)
-		return (-1);
-	// print_env(shell);
-	printf("%d\n", get_builtin_type("echo"));
-	printf("%d\n", get_builtin_type("ls"));
-	return (0);
+	i = 0;
+	len = ft_strlen(str);
+	new_string = malloc(sizeof(char) * len + 1);
+	if (!new_string)
+		return (NULL);
+	while (str[i])
+	{
+		new_string[i] = str[i];
+		i++;
+	}
+	new_string[i] = '\0';
+	return (new_string);
 }

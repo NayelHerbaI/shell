@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jihi <jihi@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/13 15:19:29 by jihi              #+#    #+#             */
-/*   Updated: 2026/04/14 13:06:54 by jihi             ###   ########.fr       */
+/*   Created: 2025/11/03 17:00:21 by hnayel            #+#    #+#             */
+/*   Updated: 2026/04/14 12:52:57 by jihi             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_env(t_shell *shell)
+int	ft_strcmp(char *s1, char *s2)
 {
-	for (t_env *tmp = shell->env; tmp; tmp = tmp->next)
-		printf("%s=%s\n", tmp->key, tmp->value);
-}
+	size_t	i;
 
-int	main(int ac, char **av, char **env)
-{
-	t_shell	*shell;
-	(void)ac;
-	(void)av;
-
-	shell = init_shell(env);
-	if (!shell)
-		return (-1);
-	// print_env(shell);
-	printf("%d\n", get_builtin_type("echo"));
-	printf("%d\n", get_builtin_type("ls"));
+	i = 0;
+	while ((s1[i] || s2[i]))
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
 	return (0);
 }
