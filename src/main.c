@@ -5,7 +5,6 @@ int	g_signal = 0;
 
 static void	run_shell(t_input *input, char **env)
 {
-	(void)env;
 	while (1)
 	{
 		signal(SIGINT, signal_readline);
