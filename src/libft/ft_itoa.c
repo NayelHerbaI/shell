@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:51:01 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 13:52:02 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/23 16:03:23 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*ft_itoa(int n)
 		buf[i--] = '-';
 	return (ft_strdup(&buf[i + 1]));
 }
+
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;

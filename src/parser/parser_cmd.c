@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:53 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 14:03:32 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/23 16:03:02 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	count_args(t_lexbuf *tok)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (tok && tok->type != PIPE)
@@ -28,8 +28,8 @@ static int	count_args(t_lexbuf *tok)
 
 static void	add_redir(t_cmd *cmd, t_redir_type type, char *file)
 {
-	t_redir *redir;
-	t_redir *last;
+	t_redir	*redir;
+	t_redir	*last;
 
 	redir = new_redir(type, file);
 	if (!cmd->redirs)
@@ -45,9 +45,9 @@ static void	add_redir(t_cmd *cmd, t_redir_type type, char *file)
 
 t_ast	*parse_command(t_lexbuf **tok)
 {
-	t_ast   *node;
-	int     argc;
-	int     i;
+	t_ast	*node;
+	int		argc;
+	int		i;
 
 	node = new_ast(AST_CMD);
 	node->cmd = new_cmd();
