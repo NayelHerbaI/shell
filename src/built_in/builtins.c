@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:30:14 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 13:31:26 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/23 17:05:58 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	exec_builtin(t_ast *node, char **env)
 		builtin_pwd();
 	else if (!ft_strncmp(cmd, "env", 4))
 		builtin_env(env);
+	else if (!ft_strcmp(cmd, "cd"))
+		builtin_cd(node, env);
 	else if (!ft_strncmp(cmd, "exit", 5))
 		exit(0);
 }

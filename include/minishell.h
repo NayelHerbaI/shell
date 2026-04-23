@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 16:11:18 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/23 17:43:15 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_input	t_input;
 typedef struct s_cmd	t_cmd;
 typedef struct s_redir	t_redir;
 typedef struct s_ast	t_ast;
+typedef struct s_env	t_env;
 
 extern int				g_signal;
 
@@ -107,6 +108,7 @@ typedef struct s_input
 	t_ast			*ast;
 	size_t			nread;
 	int				exit_status;
+	t_env			*env;
 	int				again;
 	int				len;
 }	t_input;
@@ -121,6 +123,13 @@ typedef struct s_lexbuf
 	t_input			*input;
 }	t_lexbuf;
 
+typedef struct s_env // Env pour unset et export.
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
 /* PROGRAM */
 int			main(int ac, char **av, char **env);
 
@@ -128,6 +137,12 @@ int			main(int ac, char **av, char **env);
 void		init_utils(t_utils *utils);
 void		init_struct(t_input *input);
 void		reset_iterators(t_utils *utils);
+t_env		*init_env(char **envp);
+
+/* NODE_UTILS */
+
+void		add_back(t_env **list, t_env *new);
+t_env		*add_new(char *str);
 
 /* SIGNALS */
 void		signal_readline(int signum);
@@ -166,5 +181,8 @@ void		exec_redirs(t_redir *redir);
 char		*find_path(char *cmd, char **env);
 int			is_builtin(char *cmd);
 void		exec_builtin(t_ast *node, char **env);
+
+/* BUILT_IN */
+void		builtin_cd(t_ast *node, char **env);
 
 #endif

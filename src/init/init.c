@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:28:46 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 13:39:11 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/23 16:38:18 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	init_struct(t_input *input)
 {
 	input->linebuffer = NULL;
 	input->tokens = NULL;
+	input->env = NULL;
 	input->ast = NULL;
 	input->nread = 0;
 	input->exit_status = 0;

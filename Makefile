@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/04/23 13:54:51 by hnayel           ###   ########.fr        #
+#    Updated: 2026/04/23 16:45:49 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,11 +25,14 @@ CLEAN_DIR = $(SRC_DIR)cleaning/
 EXECUTOR_DIR = $(SRC_DIR)executor/
 LEXER_DIR = $(SRC_DIR)lexer/
 PARSER_DIR = $(SRC_DIR)parser/
+CD_DIR = $(BUILT_IN_DIR)cd/
 OBJ_DIR = obj
 
 SRC        = \
                 $(SRC_DIR)main.c \
                 $(INIT_DIR)init.c \
+                $(INIT_DIR)init_env.c \
+                $(INIT_DIR)node_utils.c \
                 $(SIG_DIR)signals.c \
                 $(CLEAN_DIR)free.c \
                 $(LIBFT_DIR)ft_mem.c \
@@ -50,7 +53,8 @@ SRC        = \
                 $(EXECUTOR_DIR)executor_cmd.c \
                 $(EXECUTOR_DIR)executor_pipe.c \
                 $(EXECUTOR_DIR)executor_redir.c \
-                $(BUILT_IN_DIR)builtins.c
+                $(BUILT_IN_DIR)builtins.c \
+                $(CD_DIR)cd.c
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:45 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 14:01:29 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/23 16:39:11 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	run_shell(t_input *input, char **env)
 			add_history(input->linebuffer);
 			input->tokens = lexer(input->linebuffer);
 			input->ast = parser(input->tokens);
+			input->env = init_env(env);
 			executor(input->ast, env);
 			free_ast(input->ast);
 			input->ast = NULL;

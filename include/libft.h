@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:04:58 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 16:05:02 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/23 17:07:09 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *s, int c);
 char	**ft_split(char *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_itoa(int n);
