@@ -1,88 +1,102 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/23 13:28:32 by hnayel            #+#    #+#             */
+/*   Updated: 2026/04/23 13:54:27 by hnayel           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "libft.h"
 
-static size_t	count_words(char const *s, char c)
+static int	count_words(char *s, char c)
 {
-	size_t	count;
-	int		in_word;
+	int	n;
 
-	count = 0;
-	in_word = 0;
+	n = 0;
 	while (*s)
-	{
-		if (*s != c && !in_word)
-		{
-			in_word = 1;
-			count++;
-		}
-		else if (*s == c)
-			in_word = 0;
-		s++;
-	}
-	return (count);
-}
-
-static void	free_tab(char **tab, size_t i)
-{
-	while (i > 0)
-		free(tab[--i]);
-	free(tab);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**tab;
-	size_t	words;
-	size_t	i;
-	size_t	start;
-
-	if (!s)
-		return (NULL);
-	words = count_words(s, c);
-	tab = ft_calloc(words + 1, sizeof(char *));
-	if (!tab)
-		return (NULL);
-	i = 0;
-	while (i < words)
 	{
 		while (*s == c)
 			s++;
-		start = 0;
-		while (s[start] && s[start] != c)
-			start++;
-		tab[i] = ft_substr(s, 0, start);
-		if (!tab[i])
-			return (free_tab(tab, i), NULL);
-		s += start;
-		i++;
+		if (*s)
+			n++;
+		while (*s && *s != c)
+			s++;
 	}
-	return (tab);
+	return (n);
 }
 
-char	*ft_itoa(int n)
+static int	word_len(char *s, char c)
 {
-	char	buf[12];
-	int		i;
-	int		neg;
-	long	nb;
+	int	len;
 
-	nb = n;
-	i = 10;
-	neg = 0;
-	buf[11] = '\0';
-	if (nb < 0)
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	return (len);
+}
+
+static char	**free_split_partial(char **tab, int filled)
+{
+	int	i;
+
+	i = 0;
+	while (i < filled)
 	{
-		neg = 1;
-		nb = -nb;
+		free(tab[i]);
+		i++;
 	}
-	if (nb == 0)
-		buf[i--] = '0';
-	while (nb > 0)
+	free(tab);
+	return (NULL);
+}
+
+static char	*dup_word(char *s, int len)
+{
+	char	*word;
+	int		i;
+
+	word = (char *)malloc(len + 1);
+	if (!word)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		buf[i--] = (nb % 10) + '0';
-		nb /= 10;
+		word[i] = s[i];
+		i++;
 	}
-	if (neg)
-		buf[i--] = '-';
-	return (ft_strdup(&buf[i + 1]));
+	word[i] = '\0';
+	return (word);
+}
+
+char	**ft_split(char *s, char c)
+{
+	char	**tab;
+	int		i;
+	int		len;
+
+	if (!s)
+		return (NULL);
+	tab = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
+	if (!tab)
+		return (NULL);
+	i = 0;
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		if (!*s)
+			break ;
+		len = word_len(s, c);
+		tab[i] = dup_word(s, len);
+		if (!tab[i])
+			return (free_split_partial(tab, i));
+		i++;
+		s += len;
+	}
+	tab[i] = NULL;
+	return (tab);
 }
