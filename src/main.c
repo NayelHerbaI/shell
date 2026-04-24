@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:45 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 16:39:11 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/24 15:53:51 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	run_shell(t_input *input, char **env)
 			input->tokens = lexer(input->linebuffer);
 			input->ast = parser(input->tokens);
 			input->env = init_env(env);
+			input->env_copy = init_env_copy(env);
 			executor(input->ast, env);
 			free_ast(input->ast);
 			input->ast = NULL;
@@ -48,7 +49,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	init_struct(&input);
-	run_shell(&input, env);
+	init_struct(&input, env);
+	run_shell(&input, input.env_copy);
 	return (input.exit_status);
 }

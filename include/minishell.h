@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 17:43:15 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/24 15:46:31 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct s_input
 	size_t			nread;
 	int				exit_status;
 	t_env			*env;
+	char			**env_copy;
 	int				again;
 	int				len;
 }	t_input;
@@ -135,9 +136,10 @@ int			main(int ac, char **av, char **env);
 
 /* INIT */
 void		init_utils(t_utils *utils);
-void		init_struct(t_input *input);
+void		init_struct(t_input *input, char **env);
 void		reset_iterators(t_utils *utils);
 t_env		*init_env(char **envp);
+char		**init_env_copy(char **env);
 
 /* NODE_UTILS */
 
@@ -184,5 +186,6 @@ void		exec_builtin(t_ast *node, char **env);
 
 /* BUILT_IN */
 void		builtin_cd(t_ast *node, char **env);
+void		builtin_unset(t_ast *node, char **env);
 
 #endif

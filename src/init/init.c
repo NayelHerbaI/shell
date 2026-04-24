@@ -6,13 +6,13 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:28:46 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 16:38:18 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/24 15:47:25 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_struct(t_input *input)
+void	init_struct(t_input *input, char **env)
 {
 	input->linebuffer = NULL;
 	input->tokens = NULL;
@@ -22,6 +22,7 @@ void	init_struct(t_input *input)
 	input->exit_status = 0;
 	input->again = 0;
 	input->len = 0;
+	input->env_copy = init_env_copy(env);
 }
 
 void	init_utils(t_utils *utils)

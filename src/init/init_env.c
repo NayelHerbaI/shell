@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:33:37 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 17:43:33 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/24 15:42:53 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,27 @@ t_env	*init_env(char **envp)
 		i++;
 	}
 	return (env);
+}
+
+char	**init_env_copy(char **env)
+{
+	char	**envp;
+	int		i;
+	int		j;
+
+
+	i = 0;
+	while (env[i])
+		i++;
+	envp = malloc(sizeof(char *) * (i + 1));
+	if (!envp)
+		return (NULL);
+	j = 0;
+	while (j < i)
+	{
+		envp[j] = ft_strdup(env[j]);
+		j++;
+	}
+	envp[j] = NULL;
+	return (envp);
 }

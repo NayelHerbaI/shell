@@ -6,14 +6,15 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/04/23 16:45:49 by hnayel           ###   ########.fr        #
+#    Updated: 2026/04/24 15:20:08 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -lreadline -g3
+CFLAGS = -Wall -Wextra -Werror -g3
+LDFLAGS = -lreadline
 INC = -Iinclude
 
 SRC_DIR = src/
@@ -26,7 +27,8 @@ EXECUTOR_DIR = $(SRC_DIR)executor/
 LEXER_DIR = $(SRC_DIR)lexer/
 PARSER_DIR = $(SRC_DIR)parser/
 CD_DIR = $(BUILT_IN_DIR)cd/
-OBJ_DIR = obj
+UNSET_DIR = $(BUILT_IN_DIR)unset/
+OBJ_DIR = obj/
 
 SRC        = \
                 $(SRC_DIR)main.c \
@@ -54,16 +56,17 @@ SRC        = \
                 $(EXECUTOR_DIR)executor_pipe.c \
                 $(EXECUTOR_DIR)executor_redir.c \
                 $(BUILT_IN_DIR)builtins.c \
-                $(CD_DIR)cd.c
+                $(CD_DIR)cd.c \
+                $(UNSET_DIR)unset.c
 
-OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(INC) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(INC) $(OBJ) -o $(NAME) $(LDFLAGS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
