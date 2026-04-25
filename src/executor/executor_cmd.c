@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:32:50 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 14:02:03 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/25 17:55:54 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ char	*find_path(char *cmd, char **env)
 	return (NULL);
 }
 
-void	exec_cmd(t_ast *node, char **env)
+void	exec_cmd(t_ast *node, t_input *input)
 {
 	pid_t	pid;
 	char	*path;
 	int		status;
+	char	**env;
 
 	pid = fork();
 	if (pid < 0)
@@ -61,15 +62,20 @@ void	exec_cmd(t_ast *node, char **env)
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		exec_redirs(node->cmd->redirs);
+		env = env_to_array(input->env);
+		if (!env)
+			exit(1);
 		path = find_path(node->cmd->argv[0], env);
 		if (!path)
 		{
+			free_env_array(env);
 			ft_putstr_fd(node->cmd->argv[0], STDERR_FILENO);
 			ft_putstr_fd(": command not found\n", STDERR_FILENO);
 			exit(127);
 		}
 		execve(path, node->cmd->argv, env);
 		ft_free_str(path);
+		free_env_array(env);
 		exit(1);
 	}
 	waitpid(pid, &status, 0);

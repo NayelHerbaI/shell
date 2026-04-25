@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 16:51:42 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/25 17:52:20 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ void		init_struct(t_input *input, char **env);
 void		reset_iterators(t_utils *utils);
 t_env		*init_env(char **envp);
 char		**init_env_copy(char **env);
+char		**env_to_array(t_env *env);
 
 /* NODE_UTILS */
 
@@ -156,6 +157,7 @@ void		signal_here_doc(int signum);
 void		ft_free_str(char *s);
 void		ft_free_tab(char **tab);
 void		ft_free_list(t_lexbuf **tokens);
+void		free_env_array(char **envp);
 
 /* LEXER */
 t_lexbuf	*lexer(char *line);
@@ -176,16 +178,16 @@ void		free_redir(t_redir *redir);
 void		free_ast(t_ast *ast);
 
 /* EXECUTOR */
-void		executor(t_ast *ast, char **env);
-void		exec_cmd(t_ast *node, char **env);
-void		exec_pipe(t_ast *node, char **env);
+void		executor(t_ast *ast, t_input *input);
+void		exec_cmd(t_ast *node, t_input *input);
+void		exec_pipe(t_ast *node, t_input *input);
 void		exec_redirs(t_redir *redir);
 char		*find_path(char *cmd, char **env);
 int			is_builtin(char *cmd);
-void		exec_builtin(t_ast *node, char **env);
+void		exec_builtin(t_ast *node, t_input *input);
 
 /* BUILT_IN */
 void		builtin_cd(t_ast *node);
-void		builtin_unset(t_ast *node, char **env);
+void		builtin_unset(t_ast *node, t_input *input);
 
 #endif

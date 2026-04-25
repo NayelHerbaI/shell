@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/04/24 15:20:08 by hnayel           ###   ########.fr        #
+#    Updated: 2026/04/25 17:44:41 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC        = \
                 $(INIT_DIR)init.c \
                 $(INIT_DIR)init_env.c \
                 $(INIT_DIR)node_utils.c \
+                $(INIT_DIR)env_to_array.c \
                 $(SIG_DIR)signals.c \
                 $(CLEAN_DIR)free.c \
                 $(LIBFT_DIR)ft_mem.c \

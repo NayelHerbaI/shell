@@ -6,13 +6,13 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:10:40 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/24 16:01:14 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/25 17:51:51 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_unset(t_ast *node, char **env)
+void	builtin_unset(t_ast *node, t_input *input)
 {
 	int		i;
 	int		var_len;

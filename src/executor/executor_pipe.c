@@ -6,13 +6,13 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:28:50 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 13:37:27 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/25 17:50:47 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_pipe(t_ast *node, char **env)
+void	exec_pipe(t_ast *node, t_input *input)
 {
 	int		fd[2];
 	pid_t	pid1;
@@ -26,7 +26,7 @@ void	exec_pipe(t_ast *node, char **env)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		executor(node->left, env);
+		executor(node->left, input);
 		exit(0);
 	}
 	pid2 = fork();
@@ -35,7 +35,7 @@ void	exec_pipe(t_ast *node, char **env)
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
-		executor(node->right, env);
+		executor(node->right, input);
 		exit(0);
 	}
 	close(fd[0]);
