@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 17:52:20 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/25 22:59:49 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ typedef struct s_input
 	size_t			nread;
 	int				exit_status;
 	t_env			*env;
-	char			**env_copy;
 	int				again;
 	int				len;
 }	t_input;
