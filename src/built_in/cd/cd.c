@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:24:26 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/24 15:23:42 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/25 16:51:22 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_tilde_path(char *path)
 	return (0);
 }
 
-void	builtin_cd(t_ast *node, char **env)
+void	builtin_cd(t_ast *node)
 {
 	char	*path;
 
@@ -66,5 +66,4 @@ void	builtin_cd(t_ast *node, char **env)
 		path = getenv("HOME");
 	if (chdir(path) == -1)
 		perror("cd");
-	(void)env;
 }

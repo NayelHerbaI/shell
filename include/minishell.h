@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/24 15:46:31 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/25 16:51:42 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ int			is_builtin(char *cmd);
 void		exec_builtin(t_ast *node, char **env);
 
 /* BUILT_IN */
-void		builtin_cd(t_ast *node, char **env);
+void		builtin_cd(t_ast *node);
 void		builtin_unset(t_ast *node, char **env);
 
 #endif

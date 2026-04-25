@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:28:46 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/24 15:47:25 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/24 15:56:43 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_struct(t_input *input, char **env)
 	input->again = 0;
 	input->len = 0;
 	input->env_copy = init_env_copy(env);
+	input->env = init_env(env);
 }
 
 void	init_utils(t_utils *utils)

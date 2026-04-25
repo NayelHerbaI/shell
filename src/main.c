@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:45 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/24 15:53:51 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/24 15:57:55 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_signal = 0;
 
-static void	run_shell(t_input *input, char **env)
+static void	run_shell(t_input *input)
 {
 	while (1)
 	{
@@ -31,9 +31,7 @@ static void	run_shell(t_input *input, char **env)
 			add_history(input->linebuffer);
 			input->tokens = lexer(input->linebuffer);
 			input->ast = parser(input->tokens);
-			input->env = init_env(env);
-			input->env_copy = init_env_copy(env);
-			executor(input->ast, env);
+			executor(input->ast, input->env_copy);
 			free_ast(input->ast);
 			input->ast = NULL;
 			ft_free_list(&input->tokens);
@@ -50,6 +48,6 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	init_struct(&input, env);
-	run_shell(&input, input.env_copy);
+	run_shell(&input);
 	return (input.exit_status);
 }
