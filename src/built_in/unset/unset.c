@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:10:40 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 17:51:51 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/25 22:49:16 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,29 @@
 
 void	builtin_unset(t_ast *node, t_input *input)
 {
-	int		i;
-	int		var_len;
+	t_env	*curr;
+	t_env	*prev;
 	char	*var;
 
-	i = 0;
 	if (!node->cmd->argv[1])
 		return ;
 	var = node->cmd->argv[1];
-	var_len = ft_strlen(var);
-	while (env[i])
+	curr = input->env;
+	prev = NULL;
+	while (curr)
 	{
-		if (!ft_strncmp(var, env[i], var_len) && env[i][var_len] == '=')
+		if (!ft_strcmp(curr->key, var))
 		{
-				free(env[i]);
-				while (env[i + 1])
-				{
-					env[i] = env[i + 1];
-					i++;
-				}
-				env[i] = NULL;
-				return ;
+			if (prev)
+				prev->next = curr->next;
+			else
+				input->env = curr->next;
+			free(curr->key);
+			free(curr->value);
+			free(curr);
+			return ;
 		}
-		i++;
+		prev = curr;
+		curr = curr->next;
 	}
 }
