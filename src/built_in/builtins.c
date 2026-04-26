@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:30:14 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/26 14:21:27 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/26 14:53:06 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,6 @@ int	is_builtin(char *cmd)
 		|| !ft_strncmp(cmd, "exit", 5));
 }
 
-static void	builtin_echo(t_ast *node)
-{
-	int	i;
-	int	newline;
-
-	i = 1;
-	newline = 1;
-	if (node->cmd->argv[1] && !ft_strncmp(node->cmd->argv[1], "-n", 3))
-	{
-		newline = 0;
-		i = 2;
-	}
-	while (node->cmd->argv[i])
-	{
-		ft_putstr_fd(node->cmd->argv[i], STDOUT_FILENO);
-		if (node->cmd->argv[i + 1])
-			ft_putchar_fd(' ', STDOUT_FILENO);
-		i++;
-	}
-	if (newline)
-		ft_putchar_fd('\n', STDOUT_FILENO);
-}
 
 static void	builtin_pwd(void)
 {
@@ -76,7 +54,7 @@ void	exec_builtin(t_ast *node, t_input *input)
 
 	cmd = node->cmd->argv[0];
 	if (!ft_strncmp(cmd, "echo", 5))
-		builtin_echo(node);
+		builtin_echo(node, input);
 	else if (!ft_strncmp(cmd, "pwd", 4))
 		builtin_pwd();
 	else if (!ft_strncmp(cmd, "env", 4))

@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/26 14:21:45 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/26 14:53:34 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,5 +191,6 @@ void		exec_builtin(t_ast *node, t_input *input);
 void		builtin_cd(t_ast *node);
 void		builtin_unset(t_ast *node, t_input *input);
 void		builtin_export(t_ast *node, t_input *input);
+void		builtin_echo(t_ast *node, t_input *input);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/04/26 14:19:53 by hnayel           ###   ########.fr        #
+#    Updated: 2026/04/26 14:54:20 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ PARSER_DIR = $(SRC_DIR)parser/
 CD_DIR = $(BUILT_IN_DIR)cd/
 UNSET_DIR = $(BUILT_IN_DIR)unset/
 EXPORT_DIR = $(BUILT_IN_DIR)export/
+ECHO_DIR = $(BUILT_IN_DIR)echo/
 OBJ_DIR = obj/
 
 SRC        = \
@@ -60,7 +61,8 @@ SRC        = \
                 $(BUILT_IN_DIR)builtins.c \
                 $(CD_DIR)cd.c \
                 $(UNSET_DIR)unset.c \
-                $(EXPORT_DIR)export.c
+                $(EXPORT_DIR)export.c \
+                $(ECHO_DIR)echo.c
 
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 
