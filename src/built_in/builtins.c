@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:30:14 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 18:02:16 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/26 14:21:27 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	exec_builtin(t_ast *node, t_input *input)
 		builtin_cd(node);
 	else if (!ft_strncmp(cmd, "unset", 6))
 		builtin_unset(node, input);
+	else if (!ft_strncmp(cmd, "export", 7))
+		builtin_export(node, input);
 	else if (!ft_strncmp(cmd, "exit", 5))
 		exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 22:59:49 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/04/26 14:21:45 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ void		reset_iterators(t_utils *utils);
 t_env		*init_env(char **envp);
 char		**init_env_copy(char **env);
 char		**env_to_array(t_env *env);
+char		*get_key(char *str);
+char		*get_value(char *str);
 
 /* NODE_UTILS */
 
@@ -188,5 +190,6 @@ void		exec_builtin(t_ast *node, t_input *input);
 /* BUILT_IN */
 void		builtin_cd(t_ast *node);
 void		builtin_unset(t_ast *node, t_input *input);
+void		builtin_export(t_ast *node, t_input *input);
 
 #endif
