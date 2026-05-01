@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:30:14 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/01 14:44:33 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 15:41:20 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,17 @@ static int	builtin_env(t_input *input)
 	return (0);
 }
 
+int	builtin_exit(t_ast *node, t_input *input)
+{
+	int	status;
+
+	status = input->exit_status;
+	if (node->cmd->argv[1])
+		status = ft_atoi(node->cmd->argv[1]);
+	exit(status);
+	return (status);
+}
+
 int	exec_builtin(t_ast *node, t_input *input)
 {
 	char	*cmd;
@@ -90,7 +101,7 @@ int	exec_builtin(t_ast *node, t_input *input)
 	else if (!ft_strncmp(cmd, "export", 7))
 		status = (builtin_export(node, input));
 	else if (!ft_strncmp(cmd, "exit", 5))
-		exit(input->exit_status);
+		return (builtin_exit(node, input));
 	else
 		status = 0;	
 	dup2(saved_stdin, STDIN_FILENO);

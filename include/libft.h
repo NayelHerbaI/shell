@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:04:58 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 17:07:09 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 15:45:33 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_itoa(int n);
+int		ft_atoi(char *str);
 
 /* char */
 int		ft_isalpha(int c);

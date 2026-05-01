@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/04/26 14:54:20 by hnayel           ###   ########.fr        #
+#    Updated: 2026/05/01 15:45:50 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC        = \
                 $(LIBFT_DIR)ft_char.c \
                 $(LIBFT_DIR)ft_puts.c \
                 $(LIBFT_DIR)ft_itoa.c \
+                $(LIBFT_DIR)ft_atoi.c \
                 $(LEXER_DIR)lexer.c \
                 $(LEXER_DIR)lexer_quotes.c \
                 $(LEXER_DIR)lexer_redir.c \

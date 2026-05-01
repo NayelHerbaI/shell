@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:10:40 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/01 14:05:36 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 15:40:01 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	builtin_unset(t_ast *node, t_input *input)
 	char	*var;
 
 	if (!node->cmd->argv[1])
-		return (-1);
+		return (0);
 	var = node->cmd->argv[1];
 	curr = input->env;
 	prev = NULL;
@@ -34,7 +34,7 @@ int	builtin_unset(t_ast *node, t_input *input)
 			free(curr->key);
 			free(curr->value);
 			free(curr);
-			return (-1);
+			return (0);
 		}
 		prev = curr;
 		curr = curr->next;
