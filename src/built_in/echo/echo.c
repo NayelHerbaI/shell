@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:52:55 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/01 14:19:17 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 15:55:52 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	builtin_echo(t_ast *node, t_input *input)
 		if (!ft_strcmp(node->cmd->argv[i], "$?"))
 		{
 			ft_putnbr_fd(input->exit_status, STDOUT_FILENO);
-			// ft_putchar_fd('\n', STDOUT_FILENO);/
+			if (node->cmd->argv[i + 1])
+				ft_putchar_fd(' ', STDOUT_FILENO);
 		}
 		else if (is_var_expansion(node->cmd->argv[i]))
 		{
