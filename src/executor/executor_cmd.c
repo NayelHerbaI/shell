@@ -6,11 +6,20 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:32:50 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/01 14:07:06 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 14:46:03 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	status_from_wait(int status)
+{
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	if (WIFSIGNALED(status))
+		return (128 + WTERMSIG(status));
+	return (1);
+}
 
 char	*find_path(char *cmd, char **env)
 {
@@ -61,7 +70,8 @@ int	exec_cmd(t_ast *node, t_input *input)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		exec_redirs(node->cmd->redirs);
+		if (exec_redirs(node->cmd->redirs))
+			exit(1);
 		env = env_to_array(input->env);
 		if (!env)
 			exit(1);
@@ -79,5 +89,5 @@ int	exec_cmd(t_ast *node, t_input *input)
 		exit(1);
 	}
 	waitpid(pid, &status, 0);
-	return (0);
+	return (status_from_wait(status));
 }
