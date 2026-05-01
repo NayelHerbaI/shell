@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:24:26 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 16:51:22 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 14:04:56 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,21 @@ int	check_tilde_path(char *path)
 	return (0);
 }
 
-void	builtin_cd(t_ast *node)
+int	builtin_cd(t_ast *node)
 {
 	char	*path;
 
 	if (empty_path(node))
-		return ;
+		return (-1);
 	path = node->cmd->argv[1];
 	if (check_tilde_path(path))
-		return ;
+		return (-1);
 	if (!ft_strcmp("~", path))
 		path = getenv("HOME");
 	if (chdir(path) == -1)
+	{
 		perror("cd");
+		return (-1);
+	}
+	return (0);
 }

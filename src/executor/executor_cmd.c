@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:32:50 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 17:55:54 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 14:07:06 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*find_path(char *cmd, char **env)
 	return (NULL);
 }
 
-void	exec_cmd(t_ast *node, t_input *input)
+int	exec_cmd(t_ast *node, t_input *input)
 {
 	pid_t	pid;
 	char	*path;
@@ -56,7 +56,7 @@ void	exec_cmd(t_ast *node, t_input *input)
 
 	pid = fork();
 	if (pid < 0)
-		return ;
+		return (-1);
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
@@ -79,4 +79,5 @@ void	exec_cmd(t_ast *node, t_input *input)
 		exit(1);
 	}
 	waitpid(pid, &status, 0);
+	return (0);
 }

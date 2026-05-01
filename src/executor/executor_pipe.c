@@ -6,20 +6,20 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:28:50 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 17:50:47 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 14:01:30 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_pipe(t_ast *node, t_input *input)
+int	exec_pipe(t_ast *node, t_input *input)
 {
 	int		fd[2];
 	pid_t	pid1;
 	pid_t	pid2;
 
 	if (pipe(fd) < 0)
-		return ;
+		return (0);
 	pid1 = fork();
 	if (pid1 == 0)
 	{
@@ -42,4 +42,5 @@ void	exec_pipe(t_ast *node, t_input *input)
 	close(fd[1]);
 	waitpid(pid1, NULL, 0);
 	waitpid(pid2, NULL, 0);
+	return (0);
 }

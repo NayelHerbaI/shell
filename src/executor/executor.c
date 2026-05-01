@@ -6,16 +6,16 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:28:52 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 17:50:02 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 14:01:17 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	executor(t_ast *node, t_input *input)
+int	executor(t_ast *node, t_input *input)
 {
 	if (!node)
-		return ;
+		return (0);
 	if (node->type == AST_PIPE)
 		exec_pipe(node, input);
 	else if (node->type == AST_CMD)
@@ -28,4 +28,5 @@ void	executor(t_ast *node, t_input *input)
 				exec_cmd(node, input);
 		}
 	}
+	return (0);
 }

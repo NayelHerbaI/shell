@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/26 14:53:34 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 14:05:44 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,18 +179,18 @@ void		free_redir(t_redir *redir);
 void		free_ast(t_ast *ast);
 
 /* EXECUTOR */
-void		executor(t_ast *ast, t_input *input);
-void		exec_cmd(t_ast *node, t_input *input);
-void		exec_pipe(t_ast *node, t_input *input);
+int			executor(t_ast *ast, t_input *input);
+int			exec_cmd(t_ast *node, t_input *input);
+int			exec_pipe(t_ast *node, t_input *input);
 void		exec_redirs(t_redir *redir);
 char		*find_path(char *cmd, char **env);
 int			is_builtin(char *cmd);
-void		exec_builtin(t_ast *node, t_input *input);
+int			exec_builtin(t_ast *node, t_input *input);
 
 /* BUILT_IN */
-void		builtin_cd(t_ast *node);
-void		builtin_unset(t_ast *node, t_input *input);
-void		builtin_export(t_ast *node, t_input *input);
-void		builtin_echo(t_ast *node, t_input *input);
+int			builtin_cd(t_ast *node);
+int			builtin_unset(t_ast *node, t_input *input);
+int			builtin_export(t_ast *node, t_input *input);
+int			builtin_echo(t_ast *node, t_input *input);
 
 #endif

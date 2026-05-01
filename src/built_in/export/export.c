@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 12:16:09 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/26 14:59:13 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 14:06:07 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	has_equal(char *str)
 	return (0);
 }
 
-void	builtin_export(t_ast *node, t_input *input)
+int	builtin_export(t_ast *node, t_input *input)
 {
 	int		i;
 
 	i = 1;
 	if (!node->cmd->argv[1])
-		return ;
+		return (-1);
 	while (node->cmd->argv[i])
 	{
 		if (has_equal(node->cmd->argv[i]))
@@ -76,4 +76,5 @@ void	builtin_export(t_ast *node, t_input *input)
 		}
 		i++;
 	}
+	return (0);
 }

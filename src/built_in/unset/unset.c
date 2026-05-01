@@ -6,20 +6,20 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:10:40 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 23:21:45 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/01 14:05:36 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_unset(t_ast *node, t_input *input)
+int	builtin_unset(t_ast *node, t_input *input)
 {
 	t_env	*curr;
 	t_env	*prev;
 	char	*var;
 
 	if (!node->cmd->argv[1])
-		return ;
+		return (-1);
 	var = node->cmd->argv[1];
 	curr = input->env;
 	prev = NULL;
@@ -34,9 +34,10 @@ void	builtin_unset(t_ast *node, t_input *input)
 			free(curr->key);
 			free(curr->value);
 			free(curr);
-			return ;
+			return (-1);
 		}
 		prev = curr;
 		curr = curr->next;
 	}
+	return (0);
 }
