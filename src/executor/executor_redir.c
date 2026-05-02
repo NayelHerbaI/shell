@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:33:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/01 14:42:58 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/02 15:51:27 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	apply_redir(t_redir *redir)
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
 	}
+	else if (redir->type == REDIR_HEREDOC)
+		return (apply_heredoc(redir));
 	return (0);
 }
 

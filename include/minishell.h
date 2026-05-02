@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/01 14:34:31 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/02 15:50:04 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,8 @@ int			exec_redirs(t_redir *redir);
 char		*find_path(char *cmd, char **env);
 int			is_builtin(char *cmd);
 int			exec_builtin(t_ast *node, t_input *input);
-int		status_from_wait(int status);
+int			status_from_wait(int status);
+int			apply_heredoc(t_redir *redir);
 
 /* BUILT_IN */
 int			builtin_cd(t_ast *node);

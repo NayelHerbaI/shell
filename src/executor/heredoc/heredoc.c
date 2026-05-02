@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 13:28:52 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/02 15:31:10 by hnayel           ###   ########.fr       */
+/*   Created: 2026/05/02 15:37:47 by hnayel            #+#    #+#             */
+/*   Updated: 2026/05/02 15:49:46 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	executor(t_ast *node, t_input *input)
+int	apply_heredoc(t_redir *redir)
 {
-	if (!node)
-		return (0);
-	if (node->type == AST_PIPE)
-		return (exec_pipe(node, input));
-	if (node->type == AST_CMD)
+	int		fd[2];
+	char	*line;
+
+	if (pipe(fd) == -1)
+		return (1);
+	while (1)
 	{
-		if (node->cmd && node->cmd->argv && node->cmd->argv[0])
+		line = readline("> ");
+		if (!line)
+			break ;
+		if (!ft_strcmp(line, redir->file))
 		{
-			if (is_builtin(node->cmd->argv[0]))
-				return (exec_builtin(node, input));
-			return (exec_cmd(node, input));
+			free(line);
+			break ;
 		}
+		ft_putstr_fd(line, fd[1]);
+		ft_putstr_fd("\n", fd[1]);
+		free(line);
 	}
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
 	return (0);
 }
