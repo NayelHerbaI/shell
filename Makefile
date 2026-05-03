@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/05/02 15:51:00 by hnayel           ###   ########.fr        #
+#    Updated: 2026/05/03 12:28:33 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRC        = \
                 $(EXECUTOR_DIR)executor_pipe.c \
                 $(EXECUTOR_DIR)executor_redir.c \
                 $(HEREDOC_DIR)heredoc.c \
+                $(HEREDOC_DIR)executor_heredoc.c \
                 $(BUILT_IN_DIR)builtins.c \
                 $(CD_DIR)cd.c \
                 $(UNSET_DIR)unset.c \

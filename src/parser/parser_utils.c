@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:58 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 14:10:24 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/03 12:16:02 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_redir	*new_redir(t_redir_type type, char *file)
 		return (NULL);
 	redir->type = type;
 	redir->file = ft_strdup(file);
+	redir->heredoc_fd = -1;
 	redir->next = NULL;
 	return (redir);
 }

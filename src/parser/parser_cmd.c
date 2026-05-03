@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:53 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 16:03:02 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/03 12:17:03 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	add_redir(t_cmd *cmd, t_redir_type type, char *file)
 	t_redir	*last;
 
 	redir = new_redir(type, file);
+	if (!redir)
+		return ;
 	if (!cmd->redirs)
 	{
 		cmd->redirs = redir;

@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:45 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/01 14:07:39 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/03 12:20:33 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static void	run_shell(t_input *input)
 			add_history(input->linebuffer);
 			input->tokens = lexer(input->linebuffer);
 			input->ast = parser(input->tokens);
-			input->exit_status = executor(input->ast, input);
+			if (prepare_heredocs(input->ast) != 0)
+				input->exit_status = 1;
+			else
+				input->exit_status = executor(input->ast, input);
 			free_ast(input->ast);
 			input->ast = NULL;
 			ft_free_list(&input->tokens);
