@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:32:50 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/01 14:46:03 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/03 14:25:02 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,12 @@ int	exec_cmd(t_ast *node, t_input *input)
 		free_env_array(env);
 		exit(1);
 	}
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+		write(STDOUT_FILENO, "\n", 1);
+	else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
+		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
 	return (status_from_wait(status));
 }

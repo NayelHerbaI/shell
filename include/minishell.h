@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/03 12:19:16 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/03 14:14:42 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_redir	t_redir;
 typedef struct s_ast	t_ast;
 typedef struct s_env	t_env;
 
-extern int				g_signal;
+extern volatile sig_atomic_t	g_signal;
 
 enum				e_token_type
 {

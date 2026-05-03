@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:49 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 14:04:49 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/03 14:14:08 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	signal_readline(int signum)
 {
-	(void)signum;
-	g_signal = SIGINT;
-	write(1, "\n", 1);
+	g_signal = signum;
+	write(STDOUT_FILENO, "\n", 1);
+	rl_on_new_line();
 	rl_replace_line("", 0);
-	rl_done = 1;
+	rl_redisplay();
 }
 
 void	signal_readline2(int signum)

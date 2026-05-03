@@ -6,13 +6,13 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:45 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/03 12:20:33 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/03 14:15:48 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_signal = 0;
+volatile sig_atomic_t	g_signal = 0;
 
 static void	run_shell(t_input *input)
 {
@@ -21,6 +21,11 @@ static void	run_shell(t_input *input)
 		signal(SIGINT, signal_readline);
 		signal(SIGQUIT, SIG_IGN);
 		input->linebuffer = readline("$> ");
+		if (g_signal == SIGINT)
+		{
+			input->exit_status = 130;
+			g_signal = 0;
+		}
 		if (!input->linebuffer)
 		{
 			ft_putstr_fd("exit\n", STDOUT_FILENO);
@@ -50,6 +55,7 @@ int	main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
+	rl_catch_signals = 0;
 	init_struct(&input, env);
 	run_shell(&input);
 	return (input.exit_status);
