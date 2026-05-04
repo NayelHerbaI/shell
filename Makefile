@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/05/03 12:28:33 by hnayel           ###   ########.fr        #
+#    Updated: 2026/05/04 15:52:00 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC        = \
                 $(LEXER_DIR)lexer_redir.c \
                 $(LEXER_DIR)lexer_utils.c \
                 $(LEXER_DIR)lexer_word.c \
+				$(LEXER_DIR)expander.c	\
                 $(PARSER_DIR)parser_cmd.c \
                 $(PARSER_DIR)parser_utils.c \
                 $(PARSER_DIR)parser.c \

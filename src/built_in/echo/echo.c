@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:52:55 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/02 15:18:28 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/04 15:34:44 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,9 @@ int	builtin_echo(t_ast *node, t_input *input)
 	}
 	while (node->cmd->argv[i])
 	{
-		if (!ft_strcmp(node->cmd->argv[i], "$?"))
-		{
-			ft_putnbr_fd(input->exit_status, STDOUT_FILENO);
-			if (node->cmd->argv[i + 1])
-				ft_putchar_fd(' ', STDOUT_FILENO);
-		}
-		else if (is_var_expansion(node->cmd->argv[i]))
-		{
-			var_expansion(node->cmd->argv[i], input);
-			if (node->cmd->argv[i + 1])
-				ft_putchar_fd(' ', STDOUT_FILENO);
-		}
-		else
-		{
-			ft_putstr_fd(node->cmd->argv[i], STDOUT_FILENO);
-			if (node->cmd->argv[i + 1])
-				ft_putchar_fd(' ', STDOUT_FILENO);
-		}
+		ft_putstr_fd(node->cmd->argv[i], STDOUT_FILENO);
+		if (node->cmd->argv[i + 1])
+			ft_putchar_fd(' ', STDOUT_FILENO);
 		i++;
 	}
 	if (newline)
