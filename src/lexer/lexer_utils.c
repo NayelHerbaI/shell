@@ -6,11 +6,23 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:28:40 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/06 15:19:42 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/06 17:14:38 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	set_last_quote_type(t_lexbuf *tokens, int quote_type)
+{
+	t_lexbuf	*last;
+
+	if (!tokens)
+		return ;
+	last = tokens;
+	while (last->next)
+		last = last->next;
+	last->quote_type = quote_type;
+}
 
 t_lexbuf	*add_token(t_lexbuf **tokens, char *value, int type)
 {

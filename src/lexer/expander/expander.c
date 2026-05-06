@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 15:50:40 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/06 14:28:20 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/06 17:16:03 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	expand_tokens(t_lexbuf *tokens, t_input *input)
 
 	while (tokens)
 	{
-		if (tokens->type == WORD)
+		if (tokens->type == WORD && tokens->quote_type != QUOTE_SINGLE)
 		{
 			expanded = expand_word(tokens->value, input);
 			free(tokens->value);

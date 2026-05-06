@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/06 15:19:10 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/06 17:16:39 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ int			lex_pipe(char *line, int i, t_lexbuf **tokens);
 int			lex_redir(char *line, int i, t_lexbuf **tokens);
 t_lexbuf	*add_token(t_lexbuf **tokens, char *value, int type);
 void		expand_tokens(t_lexbuf *tokens, t_input *input);
+void		set_last_quote_type(t_lexbuf *tokens, int quote_type);
 
 /* PARSER */
 t_ast		*parser(t_lexbuf *tokens);
