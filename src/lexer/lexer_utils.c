@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:28:40 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/23 13:41:24 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/06 15:19:42 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_lexbuf	*add_token(t_lexbuf **tokens, char *value, int type)
 	new->prev = NULL;
 	new->env = NULL;
 	new->input = NULL;
+	new->quote_type = QUOTE_NONE;
 	if (!*tokens)
 	{
 		*tokens = new;

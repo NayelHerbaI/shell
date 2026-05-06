@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/04 15:49:50 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/06 15:19:10 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
+
+# define QUOTE_NONE 0
+# define QUOTE_SINGLE 1
+# define QUOTE_DOUBLE 2
 
 typedef struct s_lexbuf	t_lexbuf;
 typedef struct s_input	t_input;
@@ -122,6 +126,7 @@ typedef struct s_lexbuf
 	char			**env;
 	int				type;
 	t_input			*input;
+	int				quote_type;
 }	t_lexbuf;
 
 typedef struct s_env // Env pour unset et export.
