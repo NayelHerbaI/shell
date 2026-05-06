@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/06 17:16:39 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/06 18:59:45 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define QUOTE_NONE 0
 # define QUOTE_SINGLE 1
 # define QUOTE_DOUBLE 2
+# define PROTECTED_DOLLAR 1
 
 typedef struct s_lexbuf	t_lexbuf;
 typedef struct s_input	t_input;
