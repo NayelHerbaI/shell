@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/06 18:59:45 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/07 14:27:23 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,5 +204,6 @@ int			builtin_cd(t_ast *node);
 int			builtin_unset(t_ast *node, t_input *input);
 int			builtin_export(t_ast *node, t_input *input);
 int			builtin_echo(t_ast *node, t_input *input);
+int			builtin_exit(t_ast *node, t_input *input);
 
 #endif

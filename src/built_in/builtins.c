@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:30:14 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/01 15:41:20 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/07 14:27:09 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,6 @@ static int	builtin_env(t_input *input)
 		curr = curr->next;
 	}
 	return (0);
-}
-
-int	builtin_exit(t_ast *node, t_input *input)
-{
-	int	status;
-
-	status = input->exit_status;
-	if (node->cmd->argv[1])
-		status = ft_atoi(node->cmd->argv[1]);
-	exit(status);
-	return (status);
 }
 
 int	exec_builtin(t_ast *node, t_input *input)

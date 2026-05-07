@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/05/06 13:57:57 by hnayel           ###   ########.fr        #
+#    Updated: 2026/05/07 14:32:42 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ CD_DIR = $(BUILT_IN_DIR)cd/
 UNSET_DIR = $(BUILT_IN_DIR)unset/
 EXPORT_DIR = $(BUILT_IN_DIR)export/
 ECHO_DIR = $(BUILT_IN_DIR)echo/
+EXIT_DIR = $(BUILT_IN_DIR)exit/
 EXPANDER_DIR = $(LEXER_DIR)expander/
 OBJ_DIR = obj/
 
@@ -69,7 +70,8 @@ SRC        = \
                 $(CD_DIR)cd.c \
                 $(UNSET_DIR)unset.c \
                 $(EXPORT_DIR)export.c \
-                $(ECHO_DIR)echo.c
+                $(ECHO_DIR)echo.c \
+                $(EXIT_DIR)exit.c
 
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 

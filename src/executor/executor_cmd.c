@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:32:50 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/03 14:25:02 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/07 14:41:01 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	exec_cmd(t_ast *node, t_input *input)
 	char	*path;
 	int		status;
 	char	**env;
+	int		err;
 
 	pid = fork();
 	if (pid < 0)
@@ -84,8 +85,14 @@ int	exec_cmd(t_ast *node, t_input *input)
 			exit(127);
 		}
 		execve(path, node->cmd->argv, env);
+		err = errno;
+		perror(node->cmd->argv[0]);
 		ft_free_str(path);
 		free_env_array(env);
+		if (err == EACCES || err == EISDIR || err == ENOEXEC)
+			exit(126);
+		if (err == ENOENT)
+			exit(127);
 		exit(1);
 	}
 	signal(SIGINT, SIG_IGN);
