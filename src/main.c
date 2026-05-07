@@ -6,13 +6,28 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:45 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/07 15:37:40 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/07 18:48:04 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 volatile sig_atomic_t	g_signal = 0;
+
+void	debug_tokens(t_lexbuf *tokens, char *title)
+{
+	printf("\n--- %s ---\n", title);
+	while (tokens)
+	{
+		printf("value=[%s] type=%d quote_type=%d join_next=%d\n",
+			tokens->value,
+			tokens->type,
+			tokens->quote_type,
+			tokens->join_next);
+		tokens = tokens->next;
+	}
+	printf("------------\n");
+}
 
 static void	run_shell(t_input *input)
 {
@@ -37,7 +52,10 @@ static void	run_shell(t_input *input)
 		{
 			add_history(input->linebuffer);
 			input->tokens = lexer(input->linebuffer);
+			// debug_tokens(input->tokens, "AFTER_LEXER");
 			expand_tokens(input->tokens, input);
+			merge_joined_tokens(&input->tokens);
+			// debug_tokens(input->tokens, "AFTER_EXPAND");
 			input->ast = parser(input->tokens);
 			heredoc_status = prepare_heredocs(input->ast);
 			if (heredoc_status != 0)

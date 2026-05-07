@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/07 15:15:53 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/07 18:45:15 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef struct s_lexbuf
 	int				type;
 	t_input			*input;
 	int				quote_type;
+	int				join_next;
 }	t_lexbuf;
 
 typedef struct s_env // Env pour unset et export.
@@ -180,6 +181,9 @@ int			lex_redir(char *line, int i, t_lexbuf **tokens);
 t_lexbuf	*add_token(t_lexbuf **tokens, char *value, int type);
 void		expand_tokens(t_lexbuf *tokens, t_input *input);
 void		set_last_quote_type(t_lexbuf *tokens, int quote_type);
+int			is_word_join_char(char c);
+void		set_last_join_next(t_lexbuf *tokens, int join_next);
+void		merge_joined_tokens(t_lexbuf **tokens);
 
 /* PARSER */
 t_ast		*parser(t_lexbuf *tokens);
