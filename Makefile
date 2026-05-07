@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/05/07 14:32:42 by hnayel           ###   ########.fr        #
+#    Updated: 2026/05/07 15:10:31 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC        = \
                 $(INIT_DIR)env_to_array.c \
                 $(SIG_DIR)signals.c \
                 $(CLEAN_DIR)free.c \
+                $(CLEAN_DIR)cleaning.c \
                 $(LIBFT_DIR)ft_mem.c \
                 $(LIBFT_DIR)ft_str.c \
                 $(LIBFT_DIR)ft_split.c \

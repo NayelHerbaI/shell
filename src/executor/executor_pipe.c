@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:28:50 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/04 15:26:25 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/07 15:20:55 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	exec_pipe(t_ast *node, t_input *input)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		exit(executor(node->left, input));
+		status1 = executor(node->left, input);
+		close_heredoc_fds(node);
+		exit(status1);
 	}
 	pid2 = fork();
 	if (pid2 < 0)
@@ -44,7 +46,9 @@ int	exec_pipe(t_ast *node, t_input *input)
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
-		exit(executor(node->right, input));
+		status2 = executor(node->right, input);
+		close_heredoc_fds(node);
+		exit(status2);
 	}
 	close(fd[0]);
 	close(fd[1]);

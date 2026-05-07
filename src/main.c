@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:45 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/04 16:10:23 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/07 15:16:47 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	run_shell(t_input *input)
 				input->exit_status = 1;
 			else
 				input->exit_status = executor(input->ast, input);
+			close_heredoc_fds(input->ast);
 			free_ast(input->ast);
 			input->ast = NULL;
 			ft_free_list(&input->tokens);
@@ -53,11 +54,14 @@ static void	run_shell(t_input *input)
 int	main(int ac, char **av, char **env)
 {
 	t_input	input;
+	int		status;
 
 	(void)ac;
 	(void)av;
 	rl_catch_signals = 0;
 	init_struct(&input, env);
 	run_shell(&input);
-	return (input.exit_status);
+	status = input.exit_status;
+	free_input_end(&input);
+	return (status);
 }

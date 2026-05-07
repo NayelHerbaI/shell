@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/07 14:27:23 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/07 15:15:53 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,9 @@ void		ft_free_str(char *s);
 void		ft_free_tab(char **tab);
 void		ft_free_list(t_lexbuf **tokens);
 void		free_env_array(char **envp);
+void		free_input_end(t_input *input);
+void		free_env_list(t_env *env);
+void		close_heredoc_fds(t_ast *node);
 
 /* LEXER */
 t_lexbuf	*lexer(char *line);
