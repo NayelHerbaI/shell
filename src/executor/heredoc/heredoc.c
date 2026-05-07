@@ -6,12 +6,11 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 15:37:47 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/03 12:30:43 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/07 15:33:32 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	apply_heredoc(t_redir *redir)
 {

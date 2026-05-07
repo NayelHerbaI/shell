@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:27:45 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/07 15:16:47 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/07 15:37:40 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ volatile sig_atomic_t	g_signal = 0;
 
 static void	run_shell(t_input *input)
 {
+	int	heredoc_status;
+
 	while (1)
 	{
 		signal(SIGINT, signal_readline);
@@ -37,8 +39,9 @@ static void	run_shell(t_input *input)
 			input->tokens = lexer(input->linebuffer);
 			expand_tokens(input->tokens, input);
 			input->ast = parser(input->tokens);
-			if (prepare_heredocs(input->ast) != 0)
-				input->exit_status = 1;
+			heredoc_status = prepare_heredocs(input->ast);
+			if (heredoc_status != 0)
+				input->exit_status = heredoc_status;
 			else
 				input->exit_status = executor(input->ast, input);
 			close_heredoc_fds(input->ast);
