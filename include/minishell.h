@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/09 20:25:12 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 20:31:17 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@
 # define COMMAND_NOT_FOUND ": command not found\n"
 # define QUIT_CORE_DUMPED "Quit (core dumped)\n"
 
-typedef struct s_lexbuf	t_lexbuf;
-typedef struct s_input	t_input;
-typedef struct s_cmd	t_cmd;
-typedef struct s_redir	t_redir;
-typedef struct s_ast	t_ast;
-typedef struct s_env	t_env;
+typedef struct s_lexbuf			t_lexbuf;
+typedef struct s_input			t_input;
+typedef struct s_cmd			t_cmd;
+typedef struct s_redir			t_redir;
+typedef struct s_ast			t_ast;
+typedef struct s_env			t_env;
 
 extern volatile sig_atomic_t	g_signal;
 
@@ -221,7 +221,7 @@ char		*find_path(char *cmd, char **env);
 int			status_from_wait(int status);
 void		print_signal_message(int status);
 void		exit_execve_error(char *cmd, char *path, char **env);
-void 		print_command_not_found(char *cmd, char **env);
+void		print_command_not_found(char *cmd, char **env);
 void		setup_pipe_child_signals(void);
 int			close_pipe_error(int fd[2]);
 void		exec_left_pipe_child(t_ast *node, t_input *input, int fd[2]);
@@ -244,7 +244,8 @@ int			builtin_pwd(void);
 int			builtin_env(t_input *input);
 int			exit_will_return(t_ast *node);
 int			is_numeric_arg_for_exit(char *str);
-int			handle_exit_builtin(t_ast *node, t_input *input, int saved_stdin, int saved_stdout);
+int			handle_exit_builtin(t_ast *node, t_input *input,
+				int saved_stdin, int saved_stdout);
 int			save_fds(int *saved_stdin, int *saved_stdout);
 int			restore_fds(int saved_stdin, int saved_stdout);
 int			var_already_exists(char *var, t_input *input);
