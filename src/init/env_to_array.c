@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 17:40:10 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 17:41:42 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 20:15:20 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	**env_to_array(t_env *env)
 	envp[i] = NULL;
 	return (envp);
 }
+
 void	free_env_array(char **envp)
 {
 	int	i;

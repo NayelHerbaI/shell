@@ -6,48 +6,11 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:33:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/02 15:51:27 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 20:01:29 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	apply_redir(t_redir *redir)
-{
-	int	fd;
-
-	if (redir->type == REDIR_IN)
-	{
-		fd = open(redir->file, O_RDONLY);
-		if (fd < 0)
-		{
-			ft_putstr_fd(redir->file, STDERR_FILENO);
-			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-			return (1);
-		}
-		dup2(fd, STDIN_FILENO);
-		close(fd);
-	}
-	else if (redir->type == REDIR_OUT)
-	{
-		fd = open(redir->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd < 0)
-			return (1);
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
-	}
-	else if (redir->type == REDIR_APPEND)
-	{
-		fd = open(redir->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (fd < 0)
-			return (1);
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
-	}
-	else if (redir->type == REDIR_HEREDOC)
-		return (apply_heredoc(redir));
-	return (0);
-}
 
 int	exec_redirs(t_redir *redir)
 {

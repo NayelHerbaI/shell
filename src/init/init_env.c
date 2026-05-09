@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:33:37 by hnayel            #+#    #+#             */
-/*   Updated: 2026/04/25 17:39:57 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 20:15:08 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	**init_env_copy(char **env)
 	char	**envp;
 	int		i;
 	int		j;
-
 
 	i = 0;
 	while (env[i])

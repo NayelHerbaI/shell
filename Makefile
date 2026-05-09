@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/05/09 19:02:57 by hnayel           ###   ########.fr        #
+#    Updated: 2026/05/09 20:00:00 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ CLEAN_DIR = $(SRC_DIR)cleaning/
 EXECUTOR_DIR = $(SRC_DIR)executor/
 EXECUTOR_CMD_DIR = $(EXECUTOR_DIR)executor_cmd/
 EXECUTOR_PIPE_DIR = $(EXECUTOR_DIR)executor_pipe/
+EXECUTOR_REDIR_DIR = $(EXECUTOR_DIR)executor_redir/
 LEXER_DIR = $(SRC_DIR)lexer/
 PARSER_DIR = $(SRC_DIR)parser/
 RUN_SHELL_DIR = $(SRC_DIR)run_shell/
@@ -75,7 +76,8 @@ SRC        = \
                 $(EXECUTOR_CMD_DIR)executor_execve_error.c \
                 $(EXECUTOR_PIPE_DIR)executor_pipe.c \
                 $(EXECUTOR_PIPE_DIR)error_handling.c \
-                $(EXECUTOR_DIR)executor_redir.c \
+                $(EXECUTOR_REDIR_DIR)executor_redir.c \
+                $(EXECUTOR_REDIR_DIR)executor_redirs_files.c \
                 $(HEREDOC_DIR)heredoc.c \
                 $(HEREDOC_DIR)executor_heredoc.c \
                 $(BUILT_IN_DIR)builtins.c \

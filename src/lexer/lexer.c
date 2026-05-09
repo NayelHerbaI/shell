@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:28:45 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/07 18:45:04 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 20:16:09 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_lexbuf	*lexer(char *line)
 	while (line[i])
 	{
 		if (line[i] == '\'')
-
 			i = lex_squote(line, i, &tokens);
 		else if (line[i] == '"')
 			i = lex_dquote(line, i, &tokens);

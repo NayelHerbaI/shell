@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/09 19:05:09 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 20:18:45 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,10 @@ int			is_word_join_char(char c);
 void		set_last_join_next(t_lexbuf *tokens, int join_next);
 void		merge_joined_tokens(t_lexbuf **tokens);
 int			check_unclosed_quotes(char *line);
+char		*join_and_free(char *s1, char *s2);
+char		*expand_exit_value(char *value, t_input *input, int *i);
+char		*expand_env_var(char *word, char *result, t_input *input, int *i);
+int			is_var_char(char c);
 
 /* PARSER */
 t_ast		*parser(t_lexbuf *tokens);
@@ -221,6 +225,13 @@ void		setup_pipe_child_signals(void);
 int			close_pipe_error(int fd[2]);
 void		exec_left_pipe_child(t_ast *node, t_input *input, int fd[2]);
 void		exec_right_pipe_child(t_ast *node, t_input *input, int fd[2]);
+int			apply_redir(t_redir *redir);
+void		restore_heredoc_stdin(int saved_stdin);
+int			prepare_cmd_heredocs(t_ast *node);
+int			prepare_heredocs(t_ast *node);
+int			read_one_heredoc(t_redir *redir);
+void		write_heredoc_line(char *line, int fd);
+int			apply_heredoc(t_redir *redir);
 
 /* BUILT_IN */
 int			builtin_cd(t_ast *node);
