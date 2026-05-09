@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/05/07 15:10:31 by hnayel           ###   ########.fr        #
+#    Updated: 2026/05/09 17:44:50 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,10 @@ BUILT_IN_DIR = $(SRC_DIR)built_in/
 SIG_DIR = $(SRC_DIR)signals/
 CLEAN_DIR = $(SRC_DIR)cleaning/
 EXECUTOR_DIR = $(SRC_DIR)executor/
-HEREDOC_DIR = $(EXECUTOR_DIR)heredoc/
 LEXER_DIR = $(SRC_DIR)lexer/
 PARSER_DIR = $(SRC_DIR)parser/
+RUN_SHELL_DIR = $(SRC_DIR)run_shell/
+HEREDOC_DIR = $(EXECUTOR_DIR)heredoc/
 CD_DIR = $(BUILT_IN_DIR)cd/
 UNSET_DIR = $(BUILT_IN_DIR)unset/
 EXPORT_DIR = $(BUILT_IN_DIR)export/
@@ -41,6 +42,8 @@ SRC        = \
                 $(INIT_DIR)init_env.c \
                 $(INIT_DIR)node_utils.c \
                 $(INIT_DIR)env_to_array.c \
+                $(RUN_SHELL_DIR)run_shell.c \
+                $(RUN_SHELL_DIR)check_syntax.c \
                 $(SIG_DIR)signals.c \
                 $(CLEAN_DIR)free.c \
                 $(CLEAN_DIR)cleaning.c \

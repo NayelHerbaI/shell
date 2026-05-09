@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/07 19:12:21 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 17:44:40 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define QUOTE_SINGLE 1
 # define QUOTE_DOUBLE 2
 # define PROTECTED_DOLLAR 1
+# define SYNTAX_ERROR_PIPE "syntax error near unexpected token `|'\n"
+# define SYNTAX_ERROR_NEWLINE "syntax error near unexpected token `newline'\n"
 
 typedef struct s_lexbuf	t_lexbuf;
 typedef struct s_input	t_input;
@@ -213,5 +215,11 @@ int			builtin_unset(t_ast *node, t_input *input);
 int			builtin_export(t_ast *node, t_input *input);
 int			builtin_echo(t_ast *node, t_input *input);
 int			builtin_exit(t_ast *node, t_input *input);
+
+/* RUN_SHELL */
+void		run_shell(t_input *input);
+int			check_syntax(t_lexbuf *tokens);
+int			is_redir_token(int type);
+int			check_unclosed_quotes(char *line);
 
 #endif
