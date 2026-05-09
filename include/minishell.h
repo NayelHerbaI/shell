@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/09 20:18:45 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 20:25:12 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ t_cmd		*new_cmd(void);
 t_redir		*new_redir(t_redir_type type, char *file);
 void		free_redir(t_redir *redir);
 void		free_ast(t_ast *ast);
+int			count_args(t_lexbuf *tok);
 
 /* EXECUTOR */
 int			executor(t_ast *ast, t_input *input);

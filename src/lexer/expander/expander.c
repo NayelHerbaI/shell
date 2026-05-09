@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 15:50:40 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/09 20:18:22 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 20:25:21 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,18 @@ void	expand_tokens(t_lexbuf *tokens, t_input *input)
 		}
 		tokens = tokens->next;
 	}
+}
+
+int	count_args(t_lexbuf *tok)
+{
+	int	count;
+
+	count = 0;
+	while (tok && tok->type != PIPE)
+	{
+		if (tok->type == WORD)
+			count++;
+		tok = tok->next;
+	}
+	return (count);
 }

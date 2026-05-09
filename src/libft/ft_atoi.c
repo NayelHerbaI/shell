@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 15:44:17 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/01 15:45:37 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 20:21:47 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(char *str)
 {
-	int   res;
-	int   sign;
-	int   i;
+	int	res;
+	int	sign;
+	int	i;
 
 	res = 0;
 	sign = 1;
