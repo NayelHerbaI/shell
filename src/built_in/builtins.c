@@ -6,42 +6,11 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 13:30:14 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/07 15:02:25 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/09 18:14:11 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	is_numeric_arg_for_exit(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str || !str[0])
-		return (0);
-	if (str[i] == '+' || str[i] == '-')
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-static int	exit_will_return(t_ast *node)
-{
-	if (!node->cmd->argv[1])
-		return (0);
-	if (!is_numeric_arg_for_exit(node->cmd->argv[1]))
-		return (0);
-	if (node->cmd->argv[2])
-		return (1);
-	return (0);
-}
 
 int	restore_fds(int saved_stdin, int saved_stdout)
 {
@@ -63,35 +32,22 @@ int	is_builtin(char *cmd)
 		|| !ft_strncmp(cmd, "exit", 5));
 }
 
-
-static int	builtin_pwd(void)
+int	pick_builtin(t_ast *node, t_input *input, char *cmd)
 {
-	char	cwd[4096];
-
-	if (!getcwd(cwd, sizeof(cwd)))
-	{
-		perror("pwd");
-		return (1);
-	}
-	ft_putendl_fd(cwd, STDOUT_FILENO);
-	return (0);
-}
-
-static int	builtin_env(t_input *input)
-{
-	t_env	*curr;
-
-	curr = input->env;
-	while (curr)
-	{
-		ft_putstr_fd(curr->key, STDOUT_FILENO);
-		ft_putstr_fd("=", STDOUT_FILENO);
-		if (curr->value)
-			ft_putstr_fd(curr->value, STDOUT_FILENO);
-		ft_putchar_fd('\n', STDOUT_FILENO);
-		curr = curr->next;
-	}
-	return (0);
+	if (!ft_strncmp(cmd, "echo", 5))
+		return (builtin_echo(node, input));
+	else if (!ft_strncmp(cmd, "pwd", 4))
+		return (builtin_pwd());
+	else if (!ft_strncmp(cmd, "env", 4))
+		return (builtin_env(input));
+	else if (!ft_strncmp(cmd, "cd", 3))
+		return (builtin_cd(node));
+	else if (!ft_strncmp(cmd, "unset", 6))
+		return (builtin_unset(node, input));
+	else if (!ft_strncmp(cmd, "export", 7))
+		return (builtin_export(node, input));
+	else
+		return (0);
 }
 
 int	exec_builtin(t_ast *node, t_input *input)
@@ -101,44 +57,14 @@ int	exec_builtin(t_ast *node, t_input *input)
 	int		saved_stdout;
 	int		status;
 
-	saved_stdin = dup(STDIN_FILENO);
-	saved_stdout = dup(STDOUT_FILENO);
-	if (saved_stdin < 0 || saved_stdout < 0)
-	{
-		if (saved_stdin >= 0)
-			close(saved_stdin);
-		if (saved_stdout >= 0)
-			close(saved_stdout);
+	if (save_fds(&saved_stdin, &saved_stdout))
 		return (1);
-	}
 	if (exec_redirs(node->cmd->redirs))
 		return (restore_fds(saved_stdin, saved_stdout));
 	cmd = node->cmd->argv[0];
 	if (!ft_strncmp(cmd, "exit", 5))
-	{
-		if (exit_will_return(node))
-		{
-			status = builtin_exit(node, input);
-			restore_fds(saved_stdin, saved_stdout);
-			return (status);
-		}
-		restore_fds(saved_stdin, saved_stdout);
-		return (builtin_exit(node, input));
-	}
-	if (!ft_strncmp(cmd, "echo", 5))
-		status = builtin_echo(node, input);
-	else if (!ft_strncmp(cmd, "pwd", 4))
-		status = builtin_pwd();
-	else if (!ft_strncmp(cmd, "env", 4))
-		status = builtin_env(input);
-	else if (!ft_strncmp(cmd, "cd", 3))
-		status = builtin_cd(node);
-	else if (!ft_strncmp(cmd, "unset", 6))
-		status = builtin_unset(node, input);
-	else if (!ft_strncmp(cmd, "export", 7))
-		status = builtin_export(node, input);
-	else
-		status = 0;
+		return (handle_exit_builtin(node, input, saved_stdin, saved_stdout));
+	status = pick_builtin(node, input, cmd);
 	restore_fds(saved_stdin, saved_stdout);
 	return (status);
 }

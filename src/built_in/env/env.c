@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 13:28:52 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/09 18:20:56 by hnayel           ###   ########.fr       */
+/*   Created: 2026/05/09 18:02:09 by hnayel            #+#    #+#             */
+/*   Updated: 2026/05/09 18:02:21 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	executor(t_ast *node, t_input *input)
+int	builtin_env(t_input *input)
 {
-	if (!node)
-		return (0);
-	if (node->type == AST_PIPE)
-		return (exec_pipe(node, input));
-	if (node->type == AST_CMD)
+	t_env	*curr;
+
+	curr = input->env;
+	while (curr)
 	{
-		if (node->cmd && node->cmd->argv && node->cmd->argv[0])
-		{
-			if (is_builtin(node->cmd->argv[0]))
-				return (exec_builtin(node, input));
-			return (exec_cmd(node, input));
-		}
+		ft_putstr_fd(curr->key, STDOUT_FILENO);
+		ft_putstr_fd("=", STDOUT_FILENO);
+		if (curr->value)
+			ft_putstr_fd(curr->value, STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		curr = curr->next;
 	}
 	return (0);
 }

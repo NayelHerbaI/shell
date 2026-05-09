@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   executor_execve_error.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/23 13:28:52 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/09 18:20:56 by hnayel           ###   ########.fr       */
+/*   Created: 2026/05/09 18:40:00 by hnayel            #+#    #+#             */
+/*   Updated: 2026/05/09 18:55:54 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	executor(t_ast *node, t_input *input)
+void	print_command_not_found(char *cmd, char **env)
 {
-	if (!node)
-		return (0);
-	if (node->type == AST_PIPE)
-		return (exec_pipe(node, input));
-	if (node->type == AST_CMD)
-	{
-		if (node->cmd && node->cmd->argv && node->cmd->argv[0])
-		{
-			if (is_builtin(node->cmd->argv[0]))
-				return (exec_builtin(node, input));
-			return (exec_cmd(node, input));
-		}
-	}
-	return (0);
+	free_env_array(env);
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd(COMMAND_NOT_FOUND, STDERR_FILENO);
+	exit(127);
+}
+
+void	exit_execve_error(char *cmd, char *path, char **env)
+{
+	int	err;
+
+	err = errno;
+	perror(cmd);
+	ft_free_str(path);
+	free_env_array(env);
+	if (err == EACCES || err == EISDIR || err == ENOEXEC)
+		exit(126);
+	if (err == ENOENT)
+		exit(127);
+	exit(1);
 }

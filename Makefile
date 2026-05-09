@@ -6,7 +6,7 @@
 #    By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/22 18:05:34 by hnayel            #+#    #+#              #
-#    Updated: 2026/05/09 17:44:50 by hnayel           ###   ########.fr        #
+#    Updated: 2026/05/09 19:02:57 by hnayel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,19 @@ BUILT_IN_DIR = $(SRC_DIR)built_in/
 SIG_DIR = $(SRC_DIR)signals/
 CLEAN_DIR = $(SRC_DIR)cleaning/
 EXECUTOR_DIR = $(SRC_DIR)executor/
+EXECUTOR_CMD_DIR = $(EXECUTOR_DIR)executor_cmd/
+EXECUTOR_PIPE_DIR = $(EXECUTOR_DIR)executor_pipe/
 LEXER_DIR = $(SRC_DIR)lexer/
 PARSER_DIR = $(SRC_DIR)parser/
 RUN_SHELL_DIR = $(SRC_DIR)run_shell/
 HEREDOC_DIR = $(EXECUTOR_DIR)heredoc/
 CD_DIR = $(BUILT_IN_DIR)cd/
+PWD_DIR = $(BUILT_IN_DIR)pwd/
 UNSET_DIR = $(BUILT_IN_DIR)unset/
 EXPORT_DIR = $(BUILT_IN_DIR)export/
 ECHO_DIR = $(BUILT_IN_DIR)echo/
 EXIT_DIR = $(BUILT_IN_DIR)exit/
+ENV_DIR = $(BUILT_IN_DIR)env/
 EXPANDER_DIR = $(LEXER_DIR)expander/
 OBJ_DIR = obj/
 
@@ -65,17 +69,26 @@ SRC        = \
                 $(PARSER_DIR)parser_utils.c \
                 $(PARSER_DIR)parser.c \
                 $(EXECUTOR_DIR)executor.c \
-                $(EXECUTOR_DIR)executor_cmd.c \
-                $(EXECUTOR_DIR)executor_pipe.c \
+                $(EXECUTOR_CMD_DIR)executor_cmd.c \
+                $(EXECUTOR_CMD_DIR)executor_path.c \
+                $(EXECUTOR_CMD_DIR)executor_status.c \
+                $(EXECUTOR_CMD_DIR)executor_execve_error.c \
+                $(EXECUTOR_PIPE_DIR)executor_pipe.c \
+                $(EXECUTOR_PIPE_DIR)error_handling.c \
                 $(EXECUTOR_DIR)executor_redir.c \
                 $(HEREDOC_DIR)heredoc.c \
                 $(HEREDOC_DIR)executor_heredoc.c \
                 $(BUILT_IN_DIR)builtins.c \
+                $(BUILT_IN_DIR)builtin_exit_utils.c \
+                $(BUILT_IN_DIR)builtins_helpers.c \
                 $(CD_DIR)cd.c \
                 $(UNSET_DIR)unset.c \
                 $(EXPORT_DIR)export.c \
+                $(EXPORT_DIR)var_utils.c \
                 $(ECHO_DIR)echo.c \
-                $(EXIT_DIR)exit.c
+                $(PWD_DIR)pwd.c \
+                $(ENV_DIR)env.c \
+                $(EXIT_DIR)exit.c \
 
 OBJ = $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 
