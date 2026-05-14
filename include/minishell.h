@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 16:05:51 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/09 20:31:17 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/14 15:00:21 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define SYNTAX_ERROR_NEWLINE "syntax error near unexpected token `newline'\n"
 # define COMMAND_NOT_FOUND ": command not found\n"
 # define QUIT_CORE_DUMPED "Quit (core dumped)\n"
+# define SYNTAX_ERROR_QUOTE "syntax error: unclosed quote\n"
 
 typedef struct s_lexbuf			t_lexbuf;
 typedef struct s_input			t_input;

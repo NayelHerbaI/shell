@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 15:50:40 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/09 20:25:21 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/13 11:37:38 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,7 @@ char	*expand_word(char *word, t_input *input)
 	value = ft_strdup("");
 	while (word[i])
 	{
-		if (word[i] == PROTECTED_DOLLAR)
-		{
-			value = append_char(value, '$');
-			i++;
-		}
-		else if (word[i] == '$' && word[i + 1] == '?')
+		if (word[i] == '$' && word[i + 1] == '?')
 			value = expand_exit_value(value, input, &i);
 		else if (word[i] == '$' && word[i + 1] && is_var_char(word[i + 1]))
 			value = expand_env_var(word, value, input, &i);

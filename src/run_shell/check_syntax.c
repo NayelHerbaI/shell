@@ -6,7 +6,7 @@
 /*   By: hnayel <hnayel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:43:53 by hnayel            #+#    #+#             */
-/*   Updated: 2026/05/09 17:45:50 by hnayel           ###   ########.fr       */
+/*   Updated: 2026/05/14 14:59:56 by hnayel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_unclosed_quotes(char *line)
 	}
 	if (quote != 0)
 	{
-		ft_putstr_fd("syntax error: unclosed quote\n", STDERR_FILENO);
+		ft_putstr_fd(SYNTAX_ERROR_QUOTE, STDERR_FILENO);
 		return (2);
 	}
 	return (0);
